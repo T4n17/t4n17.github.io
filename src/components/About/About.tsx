@@ -7,6 +7,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { styled } from '@mui/material/styles';
 import { useTerminal } from '../../context/TerminalContext';
+import HackTheBoxIcon from '../icons/HackTheBoxIcon';
 
 const StyledCard = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -218,6 +219,11 @@ const About: React.FC = () => {
                   <SocialIcon whileHover={{ scale: 1.1 }}>
                     <a href="mailto:andreagaetani23@gmail.com">
                       <EmailIcon />
+                    </a>
+                  </SocialIcon>
+                  <SocialIcon whileHover={{ scale: 1.1 }}>
+                    <a href="https://app.hackthebox.com/profile/1340434">
+                      <HackTheBoxIcon />
                     </a>
                   </SocialIcon>
                 </Box>

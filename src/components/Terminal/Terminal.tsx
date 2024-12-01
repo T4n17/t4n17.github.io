@@ -19,6 +19,7 @@ const Terminal: React.FC = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
   const xtermRef = useRef<XTerm | null>(null);
   const fitAddonRef = useRef<FitAddon | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const [isReady, setIsReady] = useState(false);
   
   // Get terminal state from context
@@ -144,6 +145,55 @@ const Terminal: React.FC = () => {
 
       // Open terminal in the container
       term.open(terminalRef.current);
+
+      // Create hidden textarea for mobile input
+      const textArea = document.createElement('textarea');
+      textArea.style.position = 'absolute';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '1px';
+      textArea.style.height = '1px';
+      textArea.style.opacity = '0';
+      textArea.style.zIndex = '-1';
+      if (terminalRef.current) {
+        terminalRef.current.appendChild(textArea);
+        inputRef.current = textArea;
+
+        // Handle terminal container clicks to focus textarea
+        terminalRef.current.addEventListener('click', () => {
+          if (inputRef.current) {
+            inputRef.current.focus();
+          }
+        });
+      }
+
+      // Handle mobile input
+      textArea.addEventListener('input', (e) => {
+        const input = (e.target as HTMLTextAreaElement).value;
+        if (input) {
+          input.split('').forEach(char => {
+            currentLine += char;
+            term.write(char);
+          });
+          textArea.value = '';
+        }
+      });
+
+      textArea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          term.write('\r\n');
+          handleCommand(currentLine.trim());
+          currentLine = '';
+          term.write('\x1b[36m$\x1b[0m ');
+          e.preventDefault();
+        } else if (e.key === 'Backspace') {
+          if (currentLine.length > 0) {
+            currentLine = currentLine.slice(0, -1);
+            term.write('\b \b');
+          }
+          e.preventDefault();
+        }
+      });
 
       // Welcome message with initial newlines
       term.write('\n\n');

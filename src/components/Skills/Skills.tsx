@@ -128,7 +128,7 @@ const Skills: React.FC = () => {
           flexDirection: 'column',
           justifyContent: 'flex-start',
           alignItems: 'center',
-          overflow: 'auto',
+          overflow: 'hidden',
           paddingY: { xs: 3, sm: 4 },
         }}
       >
