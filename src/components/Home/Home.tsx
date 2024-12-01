@@ -79,7 +79,7 @@ const Home: React.FC = () => {
     const interval = setInterval(matrix, 50);
     const panelInterval = setInterval(() => {
       setActivePanel((prev) => (prev + 1) % panels.length);
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
@@ -185,7 +185,7 @@ const Home: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 1 }}
                   style={{
                     width: '100%',
                     padding: '1rem',
@@ -222,14 +222,6 @@ const Home: React.FC = () => {
                             alignItems: 'center',
                             justifyContent: 'center',
                             gap: 2,
-                            '&::before': {
-                              content: '""',
-                              width: '8px',
-                              height: '8px',
-                              backgroundColor: '#00f2ff',
-                              borderRadius: '50%',
-                              animation: 'pulse 1.5s infinite',
-                            },
                           }}
                         >
                           {item}

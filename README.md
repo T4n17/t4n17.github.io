@@ -84,12 +84,3 @@ The site is deployed using GitHub Pages:
 
 1. Ensure `homepage` in `package.json` points to your GitHub Pages URL
 2. Run `npm run deploy` to build and deploy
-
-## Focus Areas
-
-- Scripting and Development
-- Containerization
-- Network Security
-- Blue Team Operations
-- SOC Analysis
-- Incident Response
