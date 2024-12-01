@@ -1,44 +1,50 @@
 # Personal Portfolio Website
 
-A modern, cyberpunk-themed portfolio website showcasing my projects and skills. Built with React, TypeScript, and Material-UI, featuring smooth animations and a unique terminal-inspired interface.
+A dynamic, cybersecurity-focused portfolio website showcasing my expertise and projects. Built with React, TypeScript, and Material-UI, featuring an interactive Matrix-style interface and a functional terminal emulator.
 
 ## Features
 
-- **Modern Tech Stack**: Built with React 18, TypeScript, and Material-UI
-- **Cyberpunk Design**: Custom-styled components with neon effects and modern aesthetics
-- **Interactive Terminal**: Unique terminal-like interface for navigation
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Smooth Animations**: Engaging animations using Framer Motion
-- **Project Showcase**: Interactive project cards with live links
-- **Dark Mode**: Cyberpunk-inspired dark theme for optimal viewing
+- **Interactive Dashboard**: Dynamic home page with Matrix-style digital rain effect
+- **Rotating Information Panels**: Display of specializations, technical skills, and current learning focus
+- **Terminal Emulator**: Fully functional terminal interface with custom commands
+- **Cyberpunk Aesthetics**: Custom styling with neon effects and futuristic design
+- **Responsive Design**: Fluid layout adapting to all screen sizes
+- **Smooth Animations**: Engaging transitions using Framer Motion
+- **Project Showcase**: Highlighting cybersecurity and development projects
+
+## Key Components
+
+- **Home**: Interactive dashboard with Matrix rain effect and rotating information panels
+- **Terminal**: Custom terminal emulator with command history and minimization
+- **About**: Personal information and educational background
+- **Skills**: Technical expertise and areas of focus
+- **Projects**: Showcase of cybersecurity and development work
 
 ## Technologies Used
 
-- React 18
-- TypeScript
-- Material-UI
-- Framer Motion
-- React Router
-- GitHub Pages
+- React 18 with TypeScript
+- Material-UI for component styling
+- Framer Motion for animations
+- xterm.js for terminal emulation
+- Custom Canvas implementations
+- GitHub Pages for deployment
 
 ## Project Structure
 
-The project follows a component-based architecture with the following structure:
-
 ```
 src/
-├── components/         # React components
-│   ├── Terminal/      # Terminal component
-│   ├── Projects/      # Projects showcase
-│   └── ...           # Other components
-├── context/           # React context providers
-├── styles/            # Global styles and themes
-└── assets/           # Static assets
+├── components/
+│   ├── Home/         # Matrix effect and dashboard
+│   ├── Terminal/     # Terminal emulator
+│   ├── About/        # Personal information
+│   ├── Skills/       # Technical skills
+│   └── Projects/     # Project showcase
+├── context/          # Terminal state management
+├── styles/           # Global styling
+└── assets/          # Static resources
 ```
 
 ## Getting Started
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Prerequisites
 
@@ -63,18 +69,27 @@ npm install
 npm start
 ```
 
-The app will run in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Visit [http://localhost:3000](http://localhost:3000) to view the site in development mode.
 
 ## Available Scripts
 
-- `npm start`: Runs the app in development mode
+- `npm start`: Runs the development server
 - `npm test`: Launches the test runner
-- `npm run build`: Builds the app for production
-- `npm run deploy`: Deploys the app to GitHub Pages
+- `npm run build`: Creates production build
+- `npm run deploy`: Deploys to GitHub Pages
 
 ## Deployment
 
-The site is deployed using GitHub Pages. To deploy your own version:
+The site is deployed using GitHub Pages:
 
-1. Update the `homepage` in `package.json` with your GitHub Pages URL
-2. Run `npm run deploy`
+1. Ensure `homepage` in `package.json` points to your GitHub Pages URL
+2. Run `npm run deploy` to build and deploy
+
+## Focus Areas
+
+- Scripting and Development
+- Containerization
+- Network Security
+- Blue Team Operations
+- SOC Analysis
+- Incident Response

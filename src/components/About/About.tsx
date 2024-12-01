@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Container, Paper, Stack } from '@mui/material';
+import { Box, Typography, Container, Paper, Stack, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -10,7 +10,7 @@ import { useTerminal } from '../../context/TerminalContext';
 import HackTheBoxIcon from '../icons/HackTheBoxIcon';
 
 const StyledCard = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(3),
+  padding: theme.spacing(4),
   background: 'rgba(10, 25, 47, 0.5)',
   backdropFilter: 'blur(4px)',
   border: '1px solid rgba(0, 242, 255, 0.2)',
@@ -18,6 +18,9 @@ const StyledCard = styled(Paper)(({ theme }) => ({
   color: '#fff',
   textAlign: 'center',
   transition: 'all 0.3s ease',
+  width: '100%',
+  maxWidth: '800px',
+  margin: '0 auto',
   '&:hover': {
     boxShadow: '0 0 20px rgba(0, 242, 255, 0.3)',
     border: '1px solid rgba(0, 242, 255, 0.5)',
@@ -25,19 +28,19 @@ const StyledCard = styled(Paper)(({ theme }) => ({
 }));
 
 const InfoItem = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(1.5),
+  marginBottom: theme.spacing(2),
   textAlign: 'center',
   '& .label': {
     color: '#00f2ff',
     fontFamily: '"Share Tech Mono", monospace',
     marginBottom: theme.spacing(0.5),
-    fontSize: '1.1rem',
+    fontSize: '1.3rem',
     fontWeight: 500,
   },
   '& .value': {
     color: '#fff',
     fontFamily: '"Share Tech Mono", monospace',
-    fontSize: '0.95rem',
+    fontSize: '1.1rem',
   },
 }));
 
@@ -98,6 +101,7 @@ const About: React.FC = () => {
           alignItems: 'center',
           overflow: 'hidden',
           paddingY: { xs: 3, sm: 4 },
+          paddingBottom: isTerminalMinimized ? { xs: 3, sm: 4 } : { xs: 8, sm: 10 },
           width: '100%',
         }}
       >
@@ -125,55 +129,99 @@ const About: React.FC = () => {
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            style={{ width: '100%', maxWidth: '600px' }}
+            style={{ width: '100%', maxWidth: '800px' }}
           >
             <StyledCard elevation={3}>
-              <Typography variant="h5" gutterBottom sx={{
-                color: '#00f2ff',
-                fontFamily: '"Share Tech Mono", monospace',
-                marginBottom: 2,
-                textAlign: 'center'
-              }}>
-                About Me
-              </Typography>
-
-              <Stack spacing={3} alignItems="center">
+              <Stack spacing={2} alignItems="center">
                 {/* Personal Information Section */}
                 <Box width="100%" maxWidth="sm">
-                  <Stack spacing={1.5}>
-                    <InfoItem>
-                      <Typography className="label">Name</Typography>
-                      <Typography className="value">Andrea Gaetani</Typography>
-                    </InfoItem>
-                    <InfoItem>
-                      <Typography className="label">University</Typography>
-                      <Typography className="value">University of L'Aquila</Typography>
-                    </InfoItem>
-                    <InfoItem>
-                      <Typography className="label">Education</Typography>
-                      <Stack spacing={1}>
-                        <EducationItem>
-                          <ArrowRightIcon />
-                          <Box>
-                            <Typography className="value" sx={{ display: 'flex', alignItems: 'center' }}>
-                              Master's Degree in Computing System Engineering
-                              <span className="time-period">(2023 - Present)</span>
-                            </Typography>
-                          </Box>
-                        </EducationItem>
-                        <EducationItem>
-                          <ArrowRightIcon />
-                          <Box>
-                            <Typography className="value" sx={{ display: 'flex', alignItems: 'center' }}>
-                              Bachelor's Degree in Information Engineering
-                              <span className="time-period">(2019 - 2023)</span>
-                            </Typography>
-                          </Box>
-                        </EducationItem>
-                      </Stack>
-                    </InfoItem>
-                  </Stack>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <InfoItem>
+                        <Typography className="label">Name</Typography>
+                        <Typography className="value">Andrea Gaetani</Typography>
+                      </InfoItem>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <InfoItem>
+                        <Typography className="label">University</Typography>
+                        <Typography className="value">University of L'Aquila</Typography>
+                      </InfoItem>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <InfoItem sx={{ mb: 0 }}>
+                        <Typography className="label" sx={{ mb: 1 }}>Education</Typography>
+                        <Stack spacing={0.5}>
+                          <EducationItem>
+                            <ArrowRightIcon />
+                            <Box sx={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'space-between',
+                              width: '100%'
+                            }}>
+                              <Typography className="value" sx={{ 
+                                fontSize: '1rem',
+                                textAlign: 'left',
+                                flex: 1
+                              }}>
+                                Master's in Computing System Engineering
+                              </Typography>
+                              <Typography className="time-period" sx={{ 
+                                ml: 2,
+                                minWidth: '120px',
+                                textAlign: 'left',
+                                flexShrink: 0
+                              }}>
+                                (2023 - Present)
+                              </Typography>
+                            </Box>
+                          </EducationItem>
+                          <EducationItem>
+                            <ArrowRightIcon />
+                            <Box sx={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'space-between',
+                              width: '100%'
+                            }}>
+                              <Typography className="value" sx={{ 
+                                fontSize: '1rem',
+                                textAlign: 'left',
+                                flex: 1
+                              }}>
+                                Bachelor's in Information Engineering
+                              </Typography>
+                              <Typography className="time-period" sx={{ 
+                                ml: 2,
+                                minWidth: '120px',
+                                textAlign: 'left',
+                                flexShrink: 0
+                              }}>
+                                (2019 - 2023)
+                              </Typography>
+                            </Box>
+                          </EducationItem>
+                        </Stack>
+                      </InfoItem>
+                    </Grid>
+                  </Grid>
                 </Box>
+
+                <Typography 
+                  className="label" 
+                  sx={{ 
+                    textAlign: 'center',
+                    mb: 2,
+                    mt: 1,
+                    color: '#00f2ff',
+                    fontFamily: '"Share Tech Mono", monospace',
+                    fontSize: '1.3rem',
+                    fontWeight: 500
+                  }}
+                >
+                  About Me
+                </Typography>
 
                 {/* About Text Section */}
                 <Box width="100%">
@@ -181,9 +229,10 @@ const About: React.FC = () => {
                     <Typography sx={{ 
                       color: '#fff',
                       fontFamily: '"Share Tech Mono", monospace',
-                      lineHeight: 1.5,
-                      fontSize: '0.95rem',
-                      textAlign: 'center'
+                      lineHeight: 1.6,
+                      fontSize: '1.1rem',
+                      textAlign: 'center',
+                      marginBottom: 2
                     }}>
                       I am a cybersecurity enthusiast with a deep passion for ethical hacking, 
                       penetration testing, and security research. My journey in cybersecurity 
@@ -193,9 +242,10 @@ const About: React.FC = () => {
                     <Typography sx={{ 
                       color: '#fff',
                       fontFamily: '"Share Tech Mono", monospace',
-                      lineHeight: 1.5,
-                      fontSize: '0.95rem',
-                      textAlign: 'center'
+                      lineHeight: 1.6,
+                      fontSize: '1.1rem',
+                      textAlign: 'center',
+                      marginBottom: 2
                     }}>
                       My projects reflect my commitment to understanding and improving digital security, 
                       whether it's through discrete logarithm algorithms, Active Directory setups, 
@@ -205,7 +255,7 @@ const About: React.FC = () => {
                 </Box>
 
                 {/* Social Links Section */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 1 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2 }}>
                   <SocialIcon whileHover={{ scale: 1.1 }}>
                     <a href="https://github.com/t4n17" target="_blank" rel="noopener noreferrer">
                       <GitHubIcon />

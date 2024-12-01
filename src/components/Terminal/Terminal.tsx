@@ -48,25 +48,25 @@ const Terminal: React.FC = () => {
       case 'about':
         term.writeln('\x1b[36m┌─ About Me ─────────────────────────┐\x1b[0m');
         term.writeln('\x1b[36m│\x1b[0m Cybersecurity enthusiast');
-        term.writeln('\x1b[36m│\x1b[0m with a passion for:');
-        term.writeln('\x1b[36m│\x1b[0m • Ethical Hacking');
+        term.writeln('\x1b[36m│\x1b[0m with a focus on:');
         term.writeln('\x1b[36m│\x1b[0m • Penetration Testing');
-        term.writeln('\x1b[36m│\x1b[0m • Security Architecture Design');
+        term.writeln('\x1b[36m│\x1b[0m • Reverse Engineering');
+        term.writeln('\x1b[36m│\x1b[0m • Secure Development');
         term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
         break;
       case 'skills':
         term.writeln('\x1b[36m┌─ Technical Skills ──────────────────┐\x1b[0m');
-        term.writeln('\x1b[36m│\x1b[0m • Penetration Testing');
-        term.writeln('\x1b[36m│\x1b[0m • Network Security');
-        term.writeln('\x1b[36m│\x1b[0m • Malware Analysis');
-        term.writeln('\x1b[36m│\x1b[0m • Incident Response');
+        term.writeln('\x1b[36m│\x1b[0m • Development');
+        term.writeln('\x1b[36m│\x1b[0m   - Scripting and Development');
+        term.writeln('\x1b[36m│\x1b[0m   - Containerization');
+        term.writeln('\x1b[36m│\x1b[0m   - Network Securing');
         term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
         break;
       case 'projects':
-        term.writeln('\x1b[36m┌─ Recent Projects ──────────────────┐\x1b[0m');
-        term.writeln('\x1b[36m│\x1b[0m 1. Discrete Logarithm Suite');
-        term.writeln('\x1b[36m│\x1b[0m 2. Active Directory LAB');
-        term.writeln('\x1b[36m│\x1b[0m 3. Angr Overflow Finder');
+        term.writeln('\x1b[36m┌─ Featured Projects ─────────────────┐\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m • Discrete Logarithm Suite');
+        term.writeln('\x1b[36m│\x1b[0m • Active Directory LAB');
+        term.writeln('\x1b[36m│\x1b[0m • Angr Overflow Finder');
         term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
         break;
       case 'contact':
@@ -311,10 +311,23 @@ const Terminal: React.FC = () => {
         sx={{
           display: 'flex',
           justifyContent: 'flex-end',
-          padding: '4px',
+          alignItems: 'center',
+          padding: '4px 8px',
           borderBottom: '1px solid rgba(0, 242, 255, 0.2)',
+          gap: '8px',
         }}
       >
+        <Box
+          sx={{
+            color: '#00f2ff',
+            fontFamily: '"Share Tech Mono", monospace',
+            fontSize: '0.9rem',
+            opacity: 0.8,
+            letterSpacing: '0.05em',
+          }}
+        >
+          TERMINAL
+        </Box>
         <IconButton
           size="small"
           onClick={toggleTerminal}
