@@ -7,7 +7,7 @@
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
-    "@mui/icons-material": "^6.1.9",
+    "@mui/icons-material": "^6.4.4",
     "@mui/material": "^6.1.9",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -36,7 +36,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy:github": "gh-pages -d build -r https://github.com/t4n17/t4n17.github.io.git",
+    "deploy:gitlab": "gh-pages -d build -r https://gitlab.com/t4n17/t4n17.gitlab.io.git"
   },
   "eslintConfig": {
     "extends": [
@@ -57,6 +59,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.2.0"
+    "gh-pages": "^6.3.0"
   }
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Typography, Container, Paper, Stack, Grid } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Box, Typography, Container, Paper, Stack, Grid, useTheme, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -79,7 +79,24 @@ const SocialIcon = styled(motion.div)({
 });
 
 const About: React.FC = () => {
-  const { contentHeight, isTerminalMinimized } = useTerminal();
+  const { contentHeight } = useTerminal();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  useEffect(() => {
+    if (isDesktop) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    };
+  }, [isDesktop]);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -94,15 +111,12 @@ const About: React.FC = () => {
     <Container>
       <Box
         sx={{
-          minHeight: contentHeight,
+          height: { xs: 'auto', md: contentHeight },
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: 'center',
-          overflow: 'hidden',
-          paddingY: { xs: 3, sm: 4 },
-          paddingBottom: isTerminalMinimized ? { xs: 3, sm: 4 } : { xs: 8, sm: 10 },
-          width: '100%',
+          py: { xs: 4, md: 0 },
         }}
       >
         <motion.div
@@ -115,8 +129,8 @@ const About: React.FC = () => {
           }}
           initial={false}
           animate={{
-            y: isTerminalMinimized ? 0 : 40,
-            opacity: isTerminalMinimized ? 1 : 0.95,
+            y: 0,
+            opacity: 1,
           }}
           transition={{
             type: "spring",
@@ -145,7 +159,7 @@ const About: React.FC = () => {
                     <Grid item xs={12} sm={6}>
                       <InfoItem>
                         <Typography className="label">University</Typography>
-                        <Typography className="value">University of L'Aquila</Typography>
+                        <Typography className="value">Università degli Studi dell'Aquila</Typography>
                       </InfoItem>
                     </Grid>
                     <Grid item xs={12}>
@@ -234,10 +248,9 @@ const About: React.FC = () => {
                       textAlign: 'center',
                       marginBottom: 2
                     }}>
-                      I am a cybersecurity enthusiast with a deep passion for ethical hacking, 
-                      penetration testing, and security research. My journey in cybersecurity 
-                      has led me to explore various aspects of digital security, from reverse 
-                      engineering to vulnerability analysis.
+                      A passionate Information Engineer with a strong foundation in software development
+                      and system architecture. Throughout my academic journey, I've gained hands-on experience
+                      with development, security practices, containerization, and database systems.
                     </Typography>
                     <Typography sx={{ 
                       color: '#fff',
@@ -247,7 +260,7 @@ const About: React.FC = () => {
                       textAlign: 'center',
                       marginBottom: 2
                     }}>
-                      My projects reflect my commitment to understanding and improving digital security, 
+                      My projects reflect my commitment to understanding and improving my knowledge and skills, 
                       whether it's through discrete logarithm algorithms, Active Directory setups, 
                       or automated vulnerability detection tools.
                     </Typography>

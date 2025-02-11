@@ -3,14 +3,13 @@
  * Displays a grid of cybersecurity skills and expertise
  */
 
-import React from 'react';
-import { Container, Typography, Box, Paper, Stack, Link } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Container, Typography, Box, Paper, Stack, useTheme, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 import SecurityIcon from '@mui/icons-material/Security';
 import CodeIcon from '@mui/icons-material/Code';
 import StorageIcon from '@mui/icons-material/Storage';
 import BugReportIcon from '@mui/icons-material/BugReport';
-import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
 import LockIcon from '@mui/icons-material/Lock';
 import { useTerminal } from '../../context/TerminalContext';
 import { styled } from '@mui/material/styles';
@@ -89,58 +88,78 @@ const SkillItem = styled(Typography)(({ theme }) => ({
 const skillCategories: SkillCategory[] = [
   {
     title: 'Security',
-    skills: ['Penetration Testing', 'Vulnerability Assessment', 'Security Auditing', 'Risk Management'],
+    skills: ['Network Security', 'Vulnerability Assessment', 'Security Auditing', 'Software Exploitation'],
     icon: <SecurityIcon />,
     url: 'https://www.offensive-security.com/pwk-oscp/',
   },
   {
-    title: 'Development',
-    skills: ['Python', 'JavaScript/TypeScript', 'C++', 'React', 'Java'],
+    title: 'Programming Languages',
+    skills: ['Python', 'JavaScript/TypeScript', 'C/C++', 'Java', 'C#'],
     icon: <CodeIcon />,
     url: 'https://github.com/T4n17',
   },
   {
-    title: 'Network Security',
-    skills: ['Firewall Configuration', 'IDS/IPS', 'Network Monitoring', 'Traffic Analysis'],
-    icon: <NetworkCheckIcon />,
-    url: 'https://www.cisco.com/c/en/us/products/security/what-is-network-security.html',
+    title: 'Development',
+    skills: ['Software Development Lifecycle (SDLC)', 'Object-Oriented Programming', 'Agile Development', 'GitHub'],
+    icon: <CodeIcon />,
+    url: 'https://aws.amazon.com/what-is/sdlc/',
   },
   {
-    title: 'System Security',
-    skills: ['Access Control', 'System Hardening', 'Security Policies', 'Incident Response'],
+    title: 'Containerization',
+    skills: ['Docker/Podman', 'Docker-Compose', 'Docker-Swarm', 'Multiservice Architecture'],
+    icon: <StorageIcon />,
+    url: 'https://www.docker.com/',
+  },
+  {
+    title: 'System Monitoring',
+    skills: ['Grafana', 'Prometheus', 'Logging', 'Performance Monitoring'],
     icon: <LockIcon />,
-    url: 'https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final',
+    url: 'https://www.grafana.com/',
   },
   {
-    title: 'Database Security',
-    skills: ['SQL/NoSQL Security', 'Data Encryption', 'Access Management', 'Backup & Recovery'],
+    title: 'Database Management',
+    skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis'],
     icon: <StorageIcon />,
     url: 'https://www.mongodb.com/security-best-practices',
   },
   {
-    title: 'Security Tools',
-    skills: ['Metasploit', 'Wireshark', 'Nmap', 'Burp Suite'],
+    title: 'AI/ML Applications',
+    skills: ['PyTorch', 'Scikit-Learn'],
     icon: <BugReportIcon />,
-    url: 'https://www.kali.org/',
+    url: 'https://pytorch.org/',
   },
 ];
 
 const Skills: React.FC = () => {
   const { contentHeight, isTerminalMinimized } = useTerminal();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  useEffect(() => {
+    if (isDesktop) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    };
+  }, [isDesktop]);
 
   return (
     <Container>
       <Box
         sx={{
-          minHeight: contentHeight,
+          height: { xs: 'auto', md: contentHeight },
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: 'center',
-          overflow: 'hidden',
-          paddingY: { xs: 3, sm: 4 },
-          paddingBottom: { xs: 8, sm: 10 },
-          width: '100%',
+          py: { xs: 4, md: 0 },
         }}
       >
         <motion.div

@@ -37,7 +37,6 @@ const Terminal: React.FC = () => {
         term.writeln('\x1b[36mAvailable commands:\x1b[0m');
         term.writeln('  \x1b[36mhelp\x1b[0m     - Show this help message');
         term.writeln('  \x1b[36mclear\x1b[0m    - Clear the terminal');
-        term.writeln('  \x1b[36mabout\x1b[0m    - About me');
         term.writeln('  \x1b[36mskills\x1b[0m   - List my skills');
         term.writeln('  \x1b[36mprojects\x1b[0m - View my projects');
         term.writeln('  \x1b[36mcontact\x1b[0m  - Contact information');
@@ -45,28 +44,49 @@ const Terminal: React.FC = () => {
       case 'clear':
         term.clear();
         break;
-      case 'about':
-        term.writeln('\x1b[36m┌─ About Me ─────────────────────────┐\x1b[0m');
-        term.writeln('\x1b[36m│\x1b[0m Cybersecurity enthusiast');
-        term.writeln('\x1b[36m│\x1b[0m with a focus on:');
-        term.writeln('\x1b[36m│\x1b[0m • Penetration Testing');
-        term.writeln('\x1b[36m│\x1b[0m • Reverse Engineering');
-        term.writeln('\x1b[36m│\x1b[0m • Secure Development');
-        term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
-        break;
       case 'skills':
-        term.writeln('\x1b[36m┌─ Technical Skills ──────────────────┐\x1b[0m');
-        term.writeln('\x1b[36m│\x1b[0m • Development');
-        term.writeln('\x1b[36m│\x1b[0m   - Scripting and Development');
-        term.writeln('\x1b[36m│\x1b[0m   - Containerization');
-        term.writeln('\x1b[36m│\x1b[0m   - Network Securing');
+        term.writeln('\x1b[36m┌─ Skills ──────────────────────────┐\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Fields of Interest:');
+        term.writeln('\x1b[36m│\x1b[0m • Cloud Computing');
+        term.writeln('\x1b[36m│\x1b[0m • AI/ML Applications');
+        term.writeln('\x1b[36m│\x1b[0m • Secure Development');
+        term.writeln('\x1b[36m│\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Technical Expertise:');
+        term.writeln('\x1b[36m│\x1b[0m • Scripting and Development');
+        term.writeln('\x1b[36m│\x1b[0m • ICT Security');
+        term.writeln('\x1b[36m│\x1b[0m • Database Management');
+        term.writeln('\x1b[36m│\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Core Competencies:');
+        term.writeln('\x1b[36m│\x1b[0m • Software Architecture');
+        term.writeln('\x1b[36m│\x1b[0m • Problem Solving');
+        term.writeln('\x1b[36m│\x1b[0m • Agile Development');
         term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
         break;
       case 'projects':
-        term.writeln('\x1b[36m┌─ Featured Projects ─────────────────┐\x1b[0m');
-        term.writeln('\x1b[36m│\x1b[0m • Discrete Logarithm Suite');
-        term.writeln('\x1b[36m│\x1b[0m • Active Directory LAB');
-        term.writeln('\x1b[36m│\x1b[0m • Angr Overflow Finder');
+        term.writeln('\x1b[36m┌─ Projects ────────────────────────┐\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Discrete Logarithm Suite');
+        term.writeln('\x1b[36m│\x1b[0m • Python Algorithm Suite for solving discrete logarithms');
+        term.writeln('\x1b[36m│\x1b[0m • Technologies: Python, Cryptography, Mathematics');
+        term.writeln('\x1b[36m│\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Active Directory Lab');
+        term.writeln('\x1b[36m│\x1b[0m • Windows AD environment for security testing');
+        term.writeln('\x1b[36m│\x1b[0m • Technologies: Active Directory, PowerShell, Windows Server');
+        term.writeln('\x1b[36m│\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Buffer Overflow Finder');
+        term.writeln('\x1b[36m│\x1b[0m • Tool for detecting buffer overflow vulnerabilities');
+        term.writeln('\x1b[36m│\x1b[0m • Technologies: Python, Assembly, Binary Analysis');
+        term.writeln('\x1b[36m│\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Infrastructure Monitor System');
+        term.writeln('\x1b[36m│\x1b[0m • Monitoring solution with Prometheus and Grafana');
+        term.writeln('\x1b[36m│\x1b[0m • Technologies: Prometheus, Grafana, Docker, Logging');
+        term.writeln('\x1b[36m│\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Docker Development Lab');
+        term.writeln('\x1b[36m│\x1b[0m • Secure containerized development environment');
+        term.writeln('\x1b[36m│\x1b[0m • Technologies: Docker, Docker-compose, Security');
+        term.writeln('\x1b[36m│\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m Portfolio Website');
+        term.writeln('\x1b[36m│\x1b[0m • Personal portfolio with modern cyberpunk design');
+        term.writeln('\x1b[36m│\x1b[0m • Technologies: React, TypeScript, Material-UI');
         term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
         break;
       case 'contact':

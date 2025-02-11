@@ -83,23 +83,30 @@ const Navbar: React.FC = () => {
             </IconButton>
           )}
 
-          <Typography
-            variant="h6"
-            component={Link}
-            to="/"
-            sx={{
-              flexGrow: 1,
-              textDecoration: 'none',
-              color: '#00f2ff',
-              fontFamily: '"Share Tech Mono", monospace',
-              textShadow: '0 0 10px rgba(0, 242, 255, 0.5)',
-              '&:hover': {
-                color: '#7ff9ff',
-              },
-            }}
-          >
-            Portfolio
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <a
+              href="/CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  display: 'inline',
+                  color: '#00f2ff',
+                  fontFamily: '"Share Tech Mono", monospace',
+                  textShadow: '0 0 10px rgba(0, 242, 255, 0.5)',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    color: '#7ff9ff',
+                  },
+                }}
+              >
+                CV
+              </Typography>
+            </a>
+          </Box>
 
           {!isMobile && (
             <Box sx={{ display: 'flex', gap: 2 }}>
