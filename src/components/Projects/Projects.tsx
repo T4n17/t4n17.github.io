@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import { Container, Box, Typography, Grid, Card, CardContent, Chip, useTheme, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import SecurityIcon from '@mui/icons-material/Security';
 import StorageIcon from '@mui/icons-material/Storage';
 import BugReportIcon from '@mui/icons-material/BugReport';
@@ -59,6 +60,20 @@ const projects: Project[] = [
     technologies: ['Docker', 'Docker-compose', 'Security Hardening', 'Development Environment'],
     icon: <CodeIcon sx={{ fontSize: 40, color: '#00f2ff', filter: 'drop-shadow(0 0 5px rgba(0, 242, 255, 0.5))' }} />,
     url: 'https://github.com/T4n17/dockerdevlab'
+  },
+  {
+    title: 'Smart Text Analysis',
+    description: 'A Natural Language Processing (NLP) platform that provides text analysis capabilities',
+    technologies: ['Python', 'NLP', 'AI', 'Streamlit', 'FastAPI', 'transformers', 'Huggingface'],
+    icon: <CodeIcon sx={{ fontSize: 40, color: '#00f2ff', filter: 'drop-shadow(0 0 5px rgba(0, 242, 255, 0.5))' }} />,
+    url: 'https://github.com/T4n17/smart-text-analysis'
+  },
+  {
+    title: 'AI Zork',
+    description: 'Let Your LLM Play Zork!',
+    technologies: ['Python', 'LLM', 'Ollama', 'Pydantic'],
+    icon: <SportsEsportsIcon sx={{ fontSize: 40, color: '#00f2ff', filter: 'drop-shadow(0 0 5px rgba(0, 242, 255, 0.5))' }} />,
+    url: 'https://github.com/T4n17/aizork'
   },
   {
     title: 'Portfolio Website',

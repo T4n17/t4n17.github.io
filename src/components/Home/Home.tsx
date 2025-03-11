@@ -24,7 +24,7 @@ const Home: React.FC = () => {
       items: [
         "Scripting and Development",
         "ICT Security",
-        "Database Management",
+        "Containerization",
       ]
     },
     {
