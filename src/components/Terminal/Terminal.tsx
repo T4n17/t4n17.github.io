@@ -84,10 +84,6 @@ const Terminal: React.FC = () => {
         term.writeln('\x1b[36m│\x1b[0m • Secure containerized development environment');
         term.writeln('\x1b[36m│\x1b[0m • Technologies: Docker, Docker-compose, Security');
         term.writeln('\x1b[36m│\x1b[0m');
-        term.writeln('\x1b[36m│\x1b[0m Smart Text Analysis');
-        term.writeln('\x1b[36m│\x1b[0m • NLP platform for text analysis capabilities');
-        term.writeln('\x1b[36m│\x1b[0m • Technologies: Python, NLP, AI, Streamlit, FastAPI');
-        term.writeln('\x1b[36m│\x1b[0m');
         term.writeln('\x1b[36m│\x1b[0m AI Zork');
         term.writeln('\x1b[36m│\x1b[0m • Let Your LLM Play Zork!');
         term.writeln('\x1b[36m│\x1b[0m • Technologies: Python, LLM, Ollama, Pydantic');
