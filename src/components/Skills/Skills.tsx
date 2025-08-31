@@ -110,7 +110,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: 'Machine Learning',
-    technologies: ['Pytorch', 'Scikit-learn', 'Numpy', 'Pandas', 'Matplotlib'],
+    technologies: ['Pytorch', 'Scikit-learn', 'Numpy', 'Pandas', 'Matplotlib', 'Seaborn'],
     icon: <SecurityIcon />,
     url: 'https://pytorch.org/',
   },
