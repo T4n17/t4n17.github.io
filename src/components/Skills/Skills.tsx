@@ -6,10 +6,12 @@
 import React, { useEffect } from 'react';
 import { Container, Typography, Box, Paper, Stack, Grid, useTheme, useMediaQuery, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
-import SecurityIcon from '@mui/icons-material/Security';
-import CodeIcon from '@mui/icons-material/Code';
+import CloudIcon from '@mui/icons-material/Cloud';
 import StorageIcon from '@mui/icons-material/Storage';
-import LockIcon from '@mui/icons-material/Lock';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import AutoModeIcon from '@mui/icons-material/AutoMode';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import ScienceIcon from '@mui/icons-material/Science';
 import { useTerminal } from '../../context/TerminalContext';
 import { styled } from '@mui/material/styles';
 
@@ -85,40 +87,47 @@ const SkillItem = styled(Typography)(({ theme }) => ({
 // Skills categories data array
 const skillCategories: SkillCategory[] = [
   {
-    title: 'Programming Languages',
-    technologies: ['Python', 'JavaScript/TypeScript', 'C/C++', 'Java', 'C#'],
-    icon: <CodeIcon />,
-    url: 'https://www.python.org/',
+    title: 'Cloud & Architecture',
+    technologies: ['AWS Solution Architecture', 'Serverless Architectures', 'Event-Driven Architectures', 'Workflow Orchestration & Automation', 'Scalability & Reliability Design', 'API-Driven System Design'],
+    icon: <CloudIcon />,
+    url: 'https://aws.amazon.com/architecture/',
   },
   {
-    title: 'Development',
-    technologies: ['Software Development Lifecycle (SDLC)', 'Object-Oriented Programming', 'Agile Development', 'Git'],
-    icon: <CodeIcon />,
-    url: 'https://aws.amazon.com/what-is/sdlc/',
-  },
-  {
-    title: 'Containerization',
-    technologies: ['Docker/Podman', 'Docker-Compose', 'Multiservice Architecture'],
+    title: 'AWS (Hands-on)',
+    technologies: ['AWS Lambda', 'Amazon S3', 'Amazon API Gateway', 'AWS Step Functions', 'Amazon ECR', 'Amazon CloudWatch', 'AWS CloudFormation', 'Amazon SageMaker', 'Amazon Bedrock', 'AgentCore', 'Amazon Connect'],
     icon: <StorageIcon />,
-    url: 'https://www.docker.com/',
+    url: 'https://aws.amazon.com/',
   },
   {
-    title: 'DevOps',
-    technologies: ['Jenkins', 'AWS CloudFormation', 'Prometheus', 'Grafana'],
-    icon: <CodeIcon />,
-    url: 'https://about.gitlab.com/topics/devops/',
+    title: 'Observability / Operations',
+    technologies: ['Monitoring & Alerting', 'Dashboards', 'Log-based Troubleshooting', 'Observability for Distributed/Serverless Workloads'],
+    icon: <MonitorHeartIcon />,
+    url: 'https://aws.amazon.com/cloudwatch/',
   },
   {
+<<<<<<< HEAD
     title: 'Machine Learning',
     technologies: ['Pytorch', 'Scikit-learn', 'Numpy', 'Pandas', 'Matplotlib', 'Seaborn'],
     icon: <SecurityIcon />,
     url: 'https://pytorch.org/',
+=======
+    title: 'Automation & Delivery',
+    technologies: ['End-to-end Process Automation', 'Workflow Acceleration', 'Operational Efficiency Improvements', 'CI/CD Concepts', 'Release Automation'],
+    icon: <AutoModeIcon />,
+    url: 'https://aws.amazon.com/devops/',
+>>>>>>> 30f1f7f (Updated CV and skills)
   },
   {
-    title: 'AI',
-    technologies: ['AWS Bedrock', 'Ollama', 'Pydantic', 'LangChain', 'CrewAI', 'HuggingFace', 'ChromaDB'],
-    icon: <CodeIcon />,
+    title: 'GenAI',
+    technologies: ['Amazon Bedrock', 'AgentCore (Agent Workflows, Tool/Function Calling)', 'LLM Application Architecture'],
+    icon: <PsychologyIcon />,
     url: 'https://aws.amazon.com/bedrock/',
+  },
+  {
+    title: 'GenAI Frameworks',
+    technologies: ['LangGraph', 'CrewAI', 'Agno', 'Strands Agents'],
+    icon: <ScienceIcon />,
+    url: 'https://langchain-ai.github.io/langgraph/',
   },
 ];
 

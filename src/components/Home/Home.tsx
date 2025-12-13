@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box, Typography, Container, useTheme, useMediaQuery } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTerminal } from '../../context/TerminalContext';
 
 const Home: React.FC = () => {
@@ -11,27 +11,27 @@ const Home: React.FC = () => {
 
   const panels = [
     {
-      title: "GENERATIVE AI",
+      title: "CLOUD-NATIVE AI",
       items: [
-        "LLMs",
-        "RAG & Knowledge Graphs",
-        "Prompt Engineering"
+        "AWS Solution Architecture",
+        "Serverless & Event-Driven Architectures",
+        "Scalability & Reliability Design"
       ]
     },
     {
       title: "AGENTIC SYSTEMS",
       items: [
-        "Agentic Architectures",
-        "Autonomous Agents",
-        "Multi-Agent Collaborative Systems",
+        "Multi-Agent Workflows",
+        "Tool & Function Calling",
+        "LLM Application Architecture"
       ]
     },
     {
-      title: "AIOPS",
+      title: "AIOPS & AUTOMATION",
       items: [
-        "Intelligent Pipelines",
-        "Automated Log Analysis and Reporting",
-        "Automated Troubleshooting"
+        "End-to-End Process Automation",
+        "Observability for Distributed Workloads",
+        "Workflow Orchestration"
       ]
     }
   ];
@@ -242,7 +242,7 @@ const Home: React.FC = () => {
                       textShadow: '0 0 10px rgba(0, 242, 255, 0.3)',
                     }}
                   >
-                    Information Engineer
+                    Computer Engineer
                   </Typography>
                 </motion.div>
               </Box>

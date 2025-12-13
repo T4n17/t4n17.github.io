@@ -1,0 +1,35 @@
+Work experience
+AI Engineer Internship, Storm Reply S.r.l.
+April 2025 - July 2025 / Rome, Italy
+Implemented a multi-agent system for automated log analysis and reporting as part of a
+Master’s thesis, enabling end-to-end ingestion, anomaly detection, root-cause triage, and
+executive reporting
+AI Cloud Architect, Storm Reply S.r.l.
+September 2025 - Today / Rome, Italy
+Designing and implementing cloud-native AI architectures on AWS to drive AIOps and end-
+to-end automation, speeding up workflows, strengthening observability, and improving
+scalability
+
+
+Skills
+Cloud & Architecture
+AWS Solution Architecture, Serverless Architectures, Event-Driven Architectures,
+Workflow Orchestration & Automation, Scalability & Reliability Design (fault tolerance,
+decoupling, resiliency patterns), API-Driven System Design
+AWS (Hands-on)
+AWS Lambda, Amazon S3, Amazon API Gateway, AWS Step Functions, Amazon ECR,
+Amazon CloudWatch, AWS CloudFormation, Amazon SageMaker, Amazon Bedrock,
+AgentCore, Amazon Connect
+Observability / Operations
+Monitoring & alerting, dashboards, log-based troubleshooting, observability for
+distributed/serverless workloads
+Automation & Delivery
+End-to-end process automation (low/no human intervention), workflow acceleration,
+operational efficiency improvements, CI/CD concepts, release automation
+GenAI (Production)
+Amazon Bedrock, AgentCore (agent workflows, tool/function calling), LLM application
+architecture (prompt patterns, orchestration, integrations), Strands Agents (multi-agent
+workflows)
+GenAI Frameworks (Prototyping & Evaluation)
+LangGraph (prototyping, production-readiness evaluation), CrewAI (prototyping,
+production-readiness evaluation), Agno (prototyping, production-readiness evaluation)

@@ -60,6 +60,7 @@ const EducationItem = styled(Box)({
   },
 });
 
+
 const SocialIcon = styled(motion.div)({
   display: 'inline-flex',
   marginRight: '16px',
@@ -179,15 +180,15 @@ const About: React.FC = () => {
                                 textAlign: 'left',
                                 flex: 1
                               }}>
-                                Master's in Computing System Engineering
+                                Master's Degree in Computer Engineering
                               </Typography>
                               <Typography className="time-period" sx={{ 
                                 ml: 2,
-                                minWidth: '120px',
+                                minWidth: '180px',
                                 textAlign: 'left',
                                 flexShrink: 0
                               }}>
-                                (2023 - Present)
+                                (September 2023 - October 2025)
                               </Typography>
                             </Box>
                           </EducationItem>
@@ -204,15 +205,15 @@ const About: React.FC = () => {
                                 textAlign: 'left',
                                 flex: 1
                               }}>
-                                Bachelor's in Information Engineering
+                                Bachelor's Degree in Information Engineering
                               </Typography>
                               <Typography className="time-period" sx={{ 
                                 ml: 2,
-                                minWidth: '120px',
+                                minWidth: '180px',
                                 textAlign: 'left',
                                 flexShrink: 0
                               }}>
-                                (2019 - 2023)
+                                (September 2019 - December 2023)
                               </Typography>
                             </Box>
                           </EducationItem>
@@ -248,7 +249,7 @@ const About: React.FC = () => {
                       textAlign: 'center',
                       marginBottom: 2
                     }}>
-                      A passionate Information Engineer with a strong foundation in Software Development
+                      A passionate Computer Engineer with a strong foundation in Software Development
                       and Machine Learning. Throughout my academic and professional journey, I've gained hands-on experience
                       with development, security practices, containerization, and cloud based solutions.
                     </Typography>
