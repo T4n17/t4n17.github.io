@@ -94,7 +94,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: 'AWS (Hands-on)',
-    technologies: ['AWS Lambda', 'Amazon S3', 'Amazon API Gateway', 'AWS Step Functions', 'Amazon ECR', 'Amazon CloudWatch', 'AWS CloudFormation', 'Amazon SageMaker', 'Amazon Bedrock', 'AgentCore', 'Amazon Connect'],
+    technologies: ['Amazon API Gateway', 'AWS Step Functions', 'Amazon ECR', 'Amazon CloudWatch', 'AWS CloudFormation', 'Amazon SageMaker', 'Amazon Bedrock', 'AgentCore'],
     icon: <StorageIcon />,
     url: 'https://aws.amazon.com/',
   },
