@@ -105,17 +105,10 @@ const skillCategories: SkillCategory[] = [
     url: 'https://aws.amazon.com/cloudwatch/',
   },
   {
-<<<<<<< HEAD
-    title: 'Machine Learning',
-    technologies: ['Pytorch', 'Scikit-learn', 'Numpy', 'Pandas', 'Matplotlib', 'Seaborn'],
-    icon: <SecurityIcon />,
-    url: 'https://pytorch.org/',
-=======
     title: 'Automation & Delivery',
     technologies: ['End-to-end Process Automation', 'Workflow Acceleration', 'Operational Efficiency Improvements', 'CI/CD Concepts', 'Release Automation'],
     icon: <AutoModeIcon />,
     url: 'https://aws.amazon.com/devops/',
->>>>>>> 30f1f7f (Updated CV and skills)
   },
   {
     title: 'GenAI',
