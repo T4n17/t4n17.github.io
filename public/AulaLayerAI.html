@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AulaLayer AI</title>
+<style>
+:root {
+  --navy:    #0B1A3A;
+  --navy-deep: #060F24;
+  --accent-dark: oklch(72% 0.18 210);
+  --accent-light: oklch(43% 0.16 235);
+  --accent-warm-dark: oklch(72% 0.18 45);
+  --accent-warm-light: oklch(48% 0.17 28);
+  --accent: var(--accent-dark);
+  --active-accent: var(--accent-dark);
+  --white:   oklch(99% 0.004 240);
+  --muted:   oklch(70% 0.01 240);
+  --surface: oklch(12% 0.01 240);
+  --rule-dark: oklch(90% 0.04 220 / 0.18);
+  --rule-light: oklch(18% 0.03 235 / 0.16);
+  --scale:   1;
+
+  --font-display: 'Arial Black', 'Aptos Display', 'SF Pro Display', system-ui, sans-serif;
+  --font-body:    'Aptos', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--navy-deep);
+  font-family: var(--font-body);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--current-bg, var(--navy-deep));
+  z-index: -1;
+  transition: background 0.5s ease;
+}
+
+.deck {
+  width: 100vw; height: 100vh;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.slide {
+  --accent: var(--accent-dark);
+  isolation: isolate;
+  position: absolute !important;
+  width: 1920px; height: 1080px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) scale(var(--scale));
+  transform-origin: center center;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.5s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.slide > :not(.slide-mark) {
+  position: relative;
+  z-index: 1;
+}
+
+.slide-mark {
+  position: absolute;
+  right: -48px;
+  bottom: -64px;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: 220px;
+  font-weight: 900;
+  line-height: 0.75;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: oklch(84% 0.12 210 / 0.08);
+  pointer-events: none;
+  transform: rotate(-6deg);
+}
+
+
+/* ═══════════════════════════════════════════════
+   SLIDE 1 — HOOK: "8.000"
+   ═══════════════════════════════════════════════ */
+.slide-hook {
+  background: var(--navy-deep);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 120px 120px 120px 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-hook::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(108deg, transparent 0 55%, oklch(72% 0.18 210 / 0.13) 55% 66%, transparent 66%),
+    repeating-linear-gradient(90deg, oklch(90% 0.04 220 / 0.055) 0 1px, transparent 1px 112px),
+    repeating-linear-gradient(0deg, oklch(90% 0.04 220 / 0.04) 0 1px, transparent 1px 112px);
+}
+
+.slide-hook::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.hook-number {
+  font-family: var(--font-display);
+  font-size: 360px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 80px oklch(60% 0.2 220 / 0.3);
+}
+
+.hook-number span {
+  color: var(--accent);
+}
+
+.hook-context {
+  font-size: 58px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-top: 24px;
+  letter-spacing: 0;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  max-width: 1100px;
+}
+
+.hook-context strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.hook-line {
+  margin-top: 72px;
+  font-size: 46px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.hook-line em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hook-tags {
+  margin-top: 48px;
+  display: flex; gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.hook-tag {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 12px 26px;
+  border: 2px solid var(--rule-dark);
+  border-radius: 4px;
+  background: oklch(13% 0.03 230 / 0.82);
+}
+
+.hook-footer {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.hook-date {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.hook-event {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.slide-hook .slide-mark {
+  top: 72px;
+  right: 96px;
+  bottom: auto;
+  font-size: 150px;
+  color: oklch(72% 0.18 210 / 0.14);
+}
+
+
+/* Omino stressato — visual di supporto per Slide 1 */
+.slide-hook .hook-character {
+  position: absolute;
+  z-index: 1;
+  right: 170px;
+  top: 225px;
+  width: 540px;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 24px 42px oklch(0% 0 0 / 0.32));
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .slide-hook .hook-character {
+    right: 155px;
+    top: 245px;
+    width: 500px;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   SLIDE 2 — PROBLEM: Three pain points
+   ═══════════════════════════════════════════════ */
+.slide-problem {
+  --accent: var(--accent-light);
+  background: var(--white);
+  color: var(--navy);
+  display: flex; flex-direction: column;
+  padding: 80px 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-problem::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(104deg, transparent 0 61%, oklch(43% 0.16 235 / 0.08) 61% 76%, transparent 76%),
+    repeating-linear-gradient(90deg, var(--rule-light) 0 1px, transparent 1px 120px);
+  pointer-events: none;
+}
+
+.slide-problem::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: var(--navy);
+}
+
+.slide-problem .slide-label {
+  font-size: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.slide-problem .problem-headline {
+  font-family: var(--font-display);
+  font-size: 78px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.05;
+  color: var(--navy);
+  margin-bottom: 16px;
+  max-width: 1100px;
+}
+
+.slide-problem .problem-headline em {
+  font-style: normal;
+  color: oklch(45% 0.12 225);
+}
+
+.slide-problem .problem-sub {
+  font-size: 30px;
+  color: oklch(50% 0.01 240);
+  margin-bottom: 60px;
+  font-weight: 400;
+  max-width: 800px;
+}
+
+.problem-trio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 34px;
+  flex: 1;
+}
+
+.trio-card {
+  border: 2px solid var(--rule-light);
+  border-top: 8px solid var(--navy);
+  padding: 30px 32px;
+  display: flex; flex-direction: column;
+  background: oklch(98% 0.006 240);
+  box-shadow: 12px 12px 0 oklch(12% 0.04 235 / 0.09);
+}
+
+.trio-card.accent {
+  border-color: var(--accent);
+  border-top-color: var(--accent);
+  background: oklch(96% 0.018 235);
+}
+
+.trio-card:nth-child(2) {
+  transform: translateY(-24px);
+}
+
+.trio-card:nth-child(3) {
+  transform: translateY(24px);
+}
+
+.trio-card .trio-role {
+  font-family: var(--font-display);
+  font-size: 46px;
+  font-weight: 900;
+  letter-spacing: 0;
+  margin-bottom: 20px;
+  color: var(--navy);
+}
+
+.trio-card .trio-pain {
+  font-size: 24px;
+  line-height: 1.6;
+  color: oklch(40% 0.01 240);
+  font-weight: 400;
+}
+
+.trio-card .trio-pain strong {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.trio-card .trio-pain em {
+  font-style: normal;
+  color: var(--accent-warm-light);
+  font-weight: 600;
+}
+
+.slide-problem .slide-mark {
+  top: 52px;
+  right: 82px;
+  bottom: auto;
+  font-size: 230px;
+  color: oklch(43% 0.16 235 / 0.09);
+}
+
+/* ═══════════════════════════════════════════════
+   SLIDE 3 — SOLUTION: The leap
+   ═══════════════════════════════════════════════ */
+.slide-solution {
+  background: var(--navy-deep);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: 92px 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-solution::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, oklch(72% 0.18 210 / 0.12), transparent 32%),
+    repeating-linear-gradient(120deg, transparent 0 52px, oklch(90% 0.04 220 / 0.06) 52px 53px);
+}
+
+.solution-label {
+  font-size: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--accent);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.solution-headline {
+  font-family: var(--font-display);
+  font-size: 94px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.05;
+  text-align: left;
+  color: var(--white);
+  margin-bottom: 80px;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+}
+
+.solution-headline em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.solution-logo {
+  position: absolute;
+  right: -550px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 600px;
+  height: auto;
+}
+
+.solution-visual {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  position: relative;
+  z-index: 1;
+}
+
+.sol-box {
+  padding: 34px 46px;
+  border: 2px solid var(--rule-dark);
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--muted);
+  text-align: center;
+  background: oklch(12% 0.01 240 / 0.86);
+}
+
+.sol-box.cyan {
+  border-color: var(--accent);
+  color: var(--navy-deep);
+  background: var(--accent);
+  box-shadow: 14px 14px 0 oklch(72% 0.18 210 / 0.16);
+}
+
+.sol-arrow {
+  font-size: 72px;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.solution-features {
+  display: flex;
+  gap: 64px;
+  margin-top: 90px;
+  position: relative;
+  z-index: 1;
+}
+
+.sol-feature {
+  text-align: left;
+  width: 420px;
+}
+
+.sol-feature .feat-icon {
+  width: 56px; height: 56px;
+  border-radius: 4px;
+  background: oklch(20% 0.06 215);
+  border: 1px solid oklch(35% 0.08 215);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 0 16px;
+  font-size: 24px;
+  color: var(--accent);
+}
+
+.sol-feature .feat-text {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 0;
+}
+
+.sol-feature .feat-sub {
+  font-size: 21px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.slide-solution .slide-mark {
+  right: 78px;
+  bottom: 70px;
+  font-size: 178px;
+  color: oklch(72% 0.18 210 / 0.10);
+}
+
+/* ═══════════════════════════════════════════════
+   SLIDE 4 — PROOF: The number
+   ═══════════════════════════════════════════════ */
+.slide-proof {
+  --accent: var(--accent-light);
+  background: var(--white);
+  color: var(--navy);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 440px;
+  grid-template-rows: auto auto 110px auto auto;
+  grid-template-areas:
+    "label stats"
+    "before stats"
+    "arrow stats"
+    "metric stats"
+    "caption stats";
+  align-content: center;
+  column-gap: 100px;
+  row-gap: 18px;
+  padding: 96px 120px 88px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-proof::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: var(--accent);
+}
+
+.slide-proof::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(112deg, transparent 0 58%, oklch(48% 0.17 28 / 0.08) 58% 72%, transparent 72%),
+    repeating-linear-gradient(90deg, var(--rule-light) 0 1px, transparent 1px 120px);
+  pointer-events: none;
+}
+
+.proof-label {
+  grid-area: label;
+  font-size: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.proof-before {
+  grid-area: before;
+  font-size: 46px;
+  color: oklch(55% 0.01 240);
+  font-weight: 400;
+  line-height: 1.18;
+  margin-bottom: 4px;
+  max-width: 930px;
+  position: relative;
+}
+
+.proof-before strong {
+  color: var(--accent-warm-light);
+  font-weight: 700;
+}
+
+.proof-arrow-down {
+  grid-area: arrow;
+  align-self: center;
+  justify-self: center;
+  width: 180px;
+  height: 98px;
+  position: relative;
+  color: transparent;
+  font-size: 0;
+}
+
+.proof-arrow-down::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 6px;
+  height: 72px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, oklch(43% 0.16 235 / 0), var(--accent) 28%, var(--accent) 82%, oklch(43% 0.16 235 / 0));
+  transform: translateX(-50%);
+}
+
+.proof-arrow-down::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 56px;
+  height: 34px;
+  background: var(--accent);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  transform: translateX(-50%);
+}
+
+.proof-after {
+  grid-area: metric;
+  font-family: var(--font-display);
+  font-size: 236px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.9;
+  color: var(--navy);
+  margin: 18px 0 0;
+  white-space: nowrap;
+}
+
+.proof-after span {
+  color: var(--accent);
+}
+
+.proof-after-label {
+  grid-area: caption;
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 0;
+  line-height: 1.15;
+  margin-bottom: 0;
+  max-width: 820px;
+}
+
+.proof-stats {
+  grid-area: stats;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  position: relative;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  align-self: stretch;
+}
+
+.proof-stat {
+  text-align: left;
+  border: 2px solid var(--rule-light);
+  background: oklch(98% 0.006 240);
+  padding: 22px 24px;
+  box-shadow: 10px 10px 0 oklch(12% 0.04 235 / 0.08);
+}
+
+.proof-stat .ps-val {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 0;
+  color: var(--navy);
+}
+
+.proof-stat .ps-label {
+  font-size: 18px;
+  color: oklch(45% 0.01 240);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.slide-proof .slide-mark {
+  right: 610px;
+  bottom: 58px;
+  font-size: 138px;
+  color: oklch(48% 0.17 28 / 0.06);
+}
+
+/* ═══════════════════════════════════════════════
+   SLIDE 5 — ASK: Bold & direct
+   ═══════════════════════════════════════════════ */
+.slide-ask {
+  background: var(--navy-deep);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: 92px 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-ask::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(106deg, transparent 0 50%, oklch(72% 0.18 210 / 0.12) 50% 60%, transparent 60%),
+    repeating-linear-gradient(90deg, oklch(90% 0.04 220 / 0.05) 0 1px, transparent 1px 120px),
+    repeating-linear-gradient(0deg, oklch(90% 0.04 220 / 0.035) 0 1px, transparent 1px 120px);
+}
+
+.slide-ask::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.ask-label {
+  font-size: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--accent);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.ask-headline {
+  font-family: var(--font-display);
+  font-size: 102px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.05;
+  text-align: left;
+  color: var(--white);
+  margin-bottom: 72px;
+  max-width: 1000px;
+  position: relative;
+  z-index: 1;
+}
+
+.ask-headline em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.ask-items {
+  display: flex;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.ask-item {
+  background: oklch(12% 0.01 240 / 0.88);
+  border: 2px solid var(--rule-dark);
+  border-radius: 4px;
+  padding: 40px 44px;
+  width: 380px;
+  text-align: left;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+.ask-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 40px oklch(58% 0.16 215 / 0.15);
+}
+
+.ask-item .ask-num {
+  font-family: var(--font-display);
+  font-size: 58px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 0;
+  margin-bottom: 12px;
+}
+
+.ask-item .ask-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.ask-item .ask-desc {
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.ask-bottom {
+  margin-top: 86px;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.ask-bottom .ask-brand {
+  font-family: var(--font-display);
+  font-size: 78px;
+  font-weight: 900;
+  letter-spacing: 0;
+  color: var(--white);
+}
+
+.ask-bottom .ask-brand span {
+  color: var(--accent);
+}
+
+.ask-bottom .ask-tagline {
+  font-size: 30px;
+  color: var(--muted);
+  margin-top: 8px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.slide-ask .slide-mark {
+  right: 84px;
+  bottom: 76px;
+  font-size: 176px;
+  color: oklch(72% 0.18 210 / 0.09);
+}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════ */
+.anim {
+  opacity: 1;
+}
+
+.slide:not(.active) .anim {
+  opacity: 0;
+}
+
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.25s; }
+.d3 { transition-delay: 0.4s; }
+.d4 { transition-delay: 0.55s; }
+.d5 { transition-delay: 0.7s; }
+.d6 { transition-delay: 0.85s; }
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════ */
+.nav-controls {
+  position: fixed;
+  bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 20px;
+  z-index: 100;
+}
+
+.nav-btn {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px solid oklch(30% 0.05 220 / 0.5);
+  background: oklch(15% 0.03 220 / 0.5);
+  color: var(--white);
+  font-size: 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, opacity 0.25s;
+  font-family: var(--font-display);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.nav-btn:hover:not(:disabled) {
+  border-color: var(--active-accent);
+  background: oklch(25% 0.06 215 / 0.6);
+  box-shadow: 0 0 20px oklch(58% 0.16 215 / 0.2);
+}
+
+.nav-btn:focus-visible {
+  outline: 3px solid var(--active-accent);
+  outline-offset: 4px;
+}
+
+.nav-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.nav-counter {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  min-width: 50px;
+  text-align: center;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--active-accent);
+  z-index: 200;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kbd-hint {
+  position: fixed;
+  bottom: 100px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: oklch(45% 0.02 240);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  z-index: 100;
+  opacity: 0.5;
+}
+
+/* Slide label */
+.slide-indicator {
+  position: fixed;
+  top: 32px; right: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--muted);
+  z-index: 100;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (pointer: coarse) {
+  .nav-controls {
+    bottom: 28px;
+    gap: 16px;
+  }
+
+  .nav-btn {
+    width: 60px; height: 60px;
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === SLIDE 4 ORologi + blocchi laterali START === */
+.slide-proof {
+  --accent: var(--accent-light);
+  background: var(--white);
+  color: var(--navy);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    "label stats"
+    "title stats"
+    "compare stats";
+  column-gap: 56px;
+  row-gap: 18px;
+  padding: 72px 120px 78px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-proof::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: var(--accent);
+}
+
+.slide-proof::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(112deg, transparent 0 58%, oklch(48% 0.17 28 / 0.08) 58% 72%, transparent 72%),
+    repeating-linear-gradient(90deg, var(--rule-light) 0 1px, transparent 1px 120px);
+  pointer-events: none;
+}
+
+.proof-label {
+  grid-area: label;
+  position: relative;
+  z-index: 1;
+  font-size: 50px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.proof-title-wrap {
+  grid-area: title;
+  position: relative;
+  z-index: 1;
+}
+
+.proof-title {
+  font-family: var(--font-display);
+  font-size: 70px;
+  font-weight: 900;
+  line-height: 1.04;
+  color: var(--navy);
+  max-width: 1260px;
+}
+
+.proof-subtitle {
+  font-size: 26px;
+  color: oklch(45% 0.01 240);
+  margin-top: 18px;
+  max-width: 1020px;
+  line-height: 1.34;
+}
+
+.proof-subtitle strong {
+  color: var(--navy);
+  font-weight: 900;
+}
+
+.proof-compare {
+  grid-area: compare;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 86px 1fr;
+  align-items: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.proof-card {
+  height: 500px;
+  border: 2px solid var(--rule-light);
+  background: oklch(98% 0.006 240);
+  box-shadow: 12px 12px 0 oklch(12% 0.04 235 / 0.08);
+  padding: 32px 34px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.proof-card.with-ai {
+  border-color: var(--accent);
+  background: oklch(96% 0.018 235);
+  box-shadow: 12px 12px 0 oklch(43% 0.16 235 / 0.16);
+}
+
+.proof-card-kicker {
+  font-size: 17px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: oklch(48% 0.17 28);
+  margin-bottom: 18px;
+}
+
+.proof-card.with-ai .proof-card-kicker {
+  color: var(--accent);
+}
+
+.proof-clock {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  border: 11px solid var(--navy);
+  background:
+    radial-gradient(circle at 50% 50%, var(--navy) 0 8px, transparent 9px),
+    radial-gradient(circle at 50% 50%, oklch(99% 0.004 240) 0 68%, oklch(93% 0.01 240) 69% 100%);
+  box-shadow:
+    inset 0 0 0 9px oklch(18% 0.03 235 / 0.10),
+    0 14px 30px oklch(12% 0.04 235 / 0.16);
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.proof-clock::before {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--navy), var(--navy)) 50% 0 / 6px 17px no-repeat,
+    linear-gradient(var(--navy), var(--navy)) 50% 100% / 6px 17px no-repeat,
+    linear-gradient(90deg, var(--navy), var(--navy)) 0 50% / 17px 6px no-repeat,
+    linear-gradient(90deg, var(--navy), var(--navy)) 100% 50% / 17px 6px no-repeat;
+  opacity: 0.9;
+}
+
+.proof-hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  border-radius: 999px;
+  background: var(--navy);
+  transform-origin: 50% 100%;
+}
+
+.proof-hand.hour {
+  height: 58px;
+  margin-left: -4px;
+  margin-top: -58px;
+}
+
+.proof-hand.minute {
+  height: 80px;
+  margin-left: -4px;
+  margin-top: -80px;
+  background: oklch(48% 0.17 28);
+}
+
+.proof-card.with-ai .proof-hand.minute {
+  background: var(--accent);
+}
+
+/* 3:00 */
+.proof-clock.slow .proof-hand.hour {
+  transform: rotate(90deg);
+}
+
+.proof-clock.slow .proof-hand.minute {
+  transform: rotate(0deg);
+}
+
+/* 1 minuto */
+.proof-clock.fast .proof-hand.hour {
+  transform: rotate(0deg);
+}
+
+.proof-clock.fast .proof-hand.minute {
+  transform: rotate(6deg);
+}
+
+.proof-time {
+  font-family: var(--font-display);
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 0.95;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.proof-time span {
+  color: oklch(48% 0.17 28);
+}
+
+.proof-card.with-ai .proof-time span {
+  color: var(--accent);
+}
+
+.proof-desc {
+  margin-top: 16px;
+  font-size: 23px;
+  line-height: 1.28;
+  color: oklch(42% 0.01 240);
+  max-width: 500px;
+}
+
+.proof-vs {
+  align-self: center;
+  justify-self: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--white);
+  background: var(--navy);
+  box-shadow: 0 14px 28px oklch(12% 0.04 235 / 0.20);
+}
+
+.proof-stats {
+  grid-area: stats;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  align-self: stretch;
+}
+
+.proof-stat {
+  text-align: left;
+  border: 2px solid var(--rule-light);
+  background: oklch(98% 0.006 240);
+  padding: 28px 26px;
+  box-shadow: 10px 10px 0 oklch(12% 0.04 235 / 0.08);
+}
+
+.proof-stat.accent {
+  border-color: var(--accent);
+  background: oklch(96% 0.018 235);
+}
+
+.proof-stat .ps-val {
+  font-family: var(--font-display);
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--navy);
+}
+
+.proof-stat .ps-val span {
+  color: var(--accent);
+}
+
+.proof-stat .ps-label {
+  font-size: 19px;
+  color: oklch(45% 0.01 240);
+  margin-top: 10px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.slide-proof .slide-mark {
+  right: 86px;
+  bottom: 58px;
+  font-size: 138px;
+  color: oklch(43% 0.16 235 / 0.07);
+}
+/* === SLIDE 4 ORologi + blocchi laterali END === */
+
+
+/* === SLIDE FINALE — prodotto + chi siamo START === */
+.slide-final {
+  background: var(--navy-deep);
+  color: var(--white);
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 86px;
+  padding: 92px 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-final::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(106deg, transparent 0 49%, oklch(72% 0.18 210 / 0.13) 49% 61%, transparent 61%),
+    repeating-linear-gradient(90deg, oklch(90% 0.04 220 / 0.055) 0 1px, transparent 1px 120px),
+    repeating-linear-gradient(0deg, oklch(90% 0.04 220 / 0.04) 0 1px, transparent 1px 120px);
+  pointer-events: none;
+}
+
+.slide-final::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.final-left,
+.final-right {
+  position: relative;
+  z-index: 1;
+}
+
+.final-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.final-kicker {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--accent);
+  margin-bottom: 26px;
+}
+
+.final-product-name {
+  font-family: var(--font-display);
+  font-size: 118px;
+  font-weight: 900;
+  line-height: 0.96;
+  letter-spacing: 0;
+  color: var(--white);
+  text-transform: uppercase;
+  max-width: 760px;
+}
+
+.final-product-name span {
+  color: var(--accent);
+}
+
+.final-logo-box {
+  margin-top: 48px;
+  width: 520px;
+  min-height: 210px;
+  border: 2px solid var(--rule-dark);
+  background: oklch(12% 0.01 240 / 0.80);
+  box-shadow: 14px 14px 0 oklch(72% 0.18 210 / 0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 34px;
+}
+
+.final-product-logo {
+  max-width: 100%;
+  max-height: 170px;
+  object-fit: contain;
+}
+
+.final-logo-fallback {
+  display: none;
+  font-family: var(--font-display);
+  font-size: 54px;
+  font-weight: 900;
+  line-height: 1.02;
+  color: var(--white);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.final-logo-fallback span {
+  color: var(--accent);
+}
+
+.final-tagline {
+  margin-top: 42px;
+  max-width: 660px;
+  font-size: 31px;
+  line-height: 1.28;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.final-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.team-panel {
+  border: 2px solid var(--rule-dark);
+  background: oklch(12% 0.01 240 / 0.86);
+  box-shadow: 18px 18px 0 oklch(72% 0.18 210 / 0.13);
+  padding: 54px 56px;
+}
+
+.team-label {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.team-title {
+  font-family: var(--font-display);
+  font-size: 74px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 42px;
+}
+
+.team-members {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.team-member {
+  border-left: 8px solid var(--accent);
+  padding: 4px 0 4px 24px;
+}
+
+.team-name {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.team-role {
+  margin-top: 8px;
+  font-size: 23px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.team-role strong {
+  color: var(--white);
+  font-weight: 800;
+}
+
+.powered-by {
+  margin-top: 48px;
+  border-top: 2px solid var(--rule-dark);
+  padding-top: 28px;
+}
+
+.powered-kicker {
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.powered-text {
+  font-size: 26px;
+  line-height: 1.3;
+  color: var(--white);
+  font-weight: 800;
+}
+
+.powered-text span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.slide-final .slide-mark {
+  right: 74px;
+  bottom: 68px;
+  font-size: 176px;
+  color: oklch(72% 0.18 210 / 0.09);
+}
+/* === SLIDE FINALE — prodotto + chi siamo END === */
+
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ═══════════ SLIDE 1: HOOK — 8.000 ═══════════ -->
+  <section class="slide slide-hook active" data-screen-label="01 Hook">
+    <div class="slide-mark" aria-hidden="true">PA</div>
+    <img class="hook-character anim d4"
+         src="omino_stress_burocrazia_trasparente.png"
+         alt="Illustrazione simpatica di una persona stressata dalla burocrazia">
+    <div class="hook-number anim d1">8<span>.</span>000</div>
+    <div class="hook-context anim d2">
+      <strong>istituti italiani</strong> intrappolati nella burocrazia
+    </div>
+    <div class="hook-line anim d3">
+      Ogni giorno, <em>ore perse</em>.<br>Ogni mese, <em>opportunità bruciate</em>.
+    </div>
+    <div class="hook-footer anim d5">
+      <div class="hook-date">22/05/2026</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SLIDE 2: PROBLEM — Three pains ═══════════ -->
+  <section class="slide slide-problem" data-screen-label="02 Problema">
+    <div class="slide-mark" aria-hidden="true">TRE</div>
+    <div class="slide-label anim d1">Il problema</div>
+    <div class="problem-headline anim d2">
+      <em>Il Tempo: </em>Lo stesso collo di bottiglia<br><em>per tre categorie</em>
+    </div>
+    <div class="problem-sub anim d3">
+      Amministrativi, docenti, studenti: tutti bloccati dagli stessi processi manuali.
+    </div>
+    <div class="problem-trio">
+      <div class="trio-card anim d4">
+        <div class="trio-role">Amministrativi</div>
+        <div class="trio-pain">
+          <strong>Giorni</strong> spesi a creare sempre gli stessi documenti.<br>
+          Software <strong>incompatibili</strong>.<br>
+          Zero funzionalità sull'analisi dei dati.<br>
+          <em>Rischio "non conformità" alla Documentazione Ministeriale.</em>
+        </div>
+      </div>
+      <div class="trio-card accent anim d5">
+        <div class="trio-role">Docenti</div>
+        <div class="trio-pain">
+          <strong>Giorni</strong> persi a cercare e creare materiali didattici.<br>
+          Zero dati sull'efficacia della didattica.<br>
+          Zero possibilità di personalizzazione sullo studente.<br>
+          <em>Valutazioni "a sensazione".</em>
+        </div>
+      </div>
+      <div class="trio-card anim d6">
+        <div class="trio-role">Studenti</div>
+        <div class="trio-pain">
+          <strong>Giorni</strong> di attesa per una risposta.<br>
+          Dati <strong>difficilemnte reperibili</strong>.<br>
+          Supporto non efficace.<br>
+          <em>Portali "labirinti burocratici".</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SLIDE 3: SOLUTION ═══════════ -->
+  <section class="slide slide-solution" data-screen-label="03 Soluzione">
+    <div class="slide-mark" aria-hidden="true">LAYER</div>
+    <div class="solution-label anim d1">La soluzione</div>
+    <div class="solution-headline anim d2">
+     <em>AulaLayer AI</em>
+     <br>
+     Un layer AI che lavora<br><em>sopra i sistemi esistenti</em>
+     <img class="solution-logo" src="AULALAYERAI.png" alt="AULA Layer AI Logo">
+    </div>
+    <div class="solution-visual anim d3">
+      <div class="sol-box">Sistemi<br>informativi<br>esistenti</div>
+      <div class="sol-arrow">→</div>
+      <div class="sol-box cyan">AulaLayer<br>AI</div>
+      <div class="sol-arrow">→</div>
+      <div class="sol-box">Segreterie · Docenti · Studenti</div>
+    </div>
+    <div class="solution-features">
+      <div class="sol-feature anim d4">
+        <div class="feat-text">Datacenter locale</div>
+        <div class="feat-sub">On-premise, zero cloud</div>
+      </div>
+      <div class="sol-feature anim d5">
+        <div class="feat-text">Integrazione non invasiva</div>
+        <div class="feat-sub">No migrazione, no downtime</div>
+      </div>
+      <div class="sol-feature anim d6">
+        <div class="feat-text">GDPR by design</div>
+        <div class="feat-sub">Privacy nativa, non aggiunta</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SLIDE 4: PROOF — confronto tempo ═══════════ -->
+  <section class="slide slide-proof" data-screen-label="04 Proof">
+    <div class="slide-mark" aria-hidden="true">SPEED</div>
+
+    <div class="proof-label anim d1">Caso d'uso</div>
+
+    <div class="proof-title-wrap">
+      <div class="proof-title anim d2">
+        Convocazione commissione di laurea
+      </div>
+      <div class="proof-subtitle anim d3">
+        Stesso compito amministrativo, due modi di lavorare:
+        processo manuale contro automazione con <strong>AulaLayer AI</strong>.
+      </div>
+    </div>
+
+    <div class="proof-compare">
+      <div class="proof-card without-ai anim d4">
+        <div class="proof-card-kicker">Senza AulaLayer AI</div>
+
+        <div class="proof-clock slow" aria-hidden="true">
+          <span class="proof-hand hour"></span>
+          <span class="proof-hand minute"></span>
+        </div>
+
+        <div class="proof-time"><span>3</span> ore</div>
+
+        <div class="proof-desc">
+          Creazione manuale, controllo dati, copia-incolla,
+          invio e verifica della convocazione.
+        </div>
+      </div>
+
+      <div class="proof-vs anim d5" aria-hidden="true">VS</div>
+
+      <div class="proof-card with-ai anim d5">
+        <div class="proof-card-kicker">Con AulaLayer AI</div>
+
+        <div class="proof-clock fast" aria-hidden="true">
+          <span class="proof-hand hour"></span>
+          <span class="proof-hand minute"></span>
+        </div>
+
+        <div class="proof-time"><span>1</span> minuto</div>
+
+        <div class="proof-desc">
+          AulaLayer AI genera la convocazione standard
+          partendo dai dati già presenti nei sistemi.
+        </div>
+      </div>
+    </div>
+
+    <div class="proof-stats">
+      <div class="proof-stat accent anim d4">
+        <div class="ps-val">-99<span>%</span></div>
+        <div class="ps-label">Tempo operativo sul singolo documento</div>
+      </div>
+
+      <div class="proof-stat anim d5">
+        <div class="ps-val">On-Prem</div>
+        <div class="ps-label">I dati restano dove sono</div>
+      </div>
+
+      <div class="proof-stat anim d6">
+        <div class="ps-val">Demo</div>
+        <div class="ps-label">Prototipo pronto</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SLIDE 5: STATO AVANZAMENTO ═══════════ -->
+  <section class="slide slide-ask" data-screen-label="05 Stato">
+    <div class="slide-mark" aria-hidden="true">PILOT</div>
+    <div class="ask-label anim d1">A che punto siamo</div>
+    <div class="ask-headline anim d2">
+      Idea validata.<br>Demo <em>funzionante</em>.
+    </div>
+    <div class="ask-items">
+      <div class="ask-item anim d3">
+        <div class="ask-title">Fatto</div>
+        <div class="ask-desc">Ricerca sul campo con istituti reali. Prototipo AI on-premise funzionante. Architettura GDPR-compliant definita.</div>
+      </div>
+      <div class="ask-item anim d4">
+        <div class="ask-title">Adesso</div>
+        <div class="ask-desc">MVP in sviluppo. Stiamo cercando il primo istituto pilota per validare il modello sul campo.</div>
+      </div>
+      <div class="ask-item anim d5">
+        <div class="ask-title">Prossimi passi</div>
+        <div class="ask-desc">Primo deployment pilota, raccolta dati di impatto, costruzione team e roadmap di scaling.</div>
+      </div>
+    </div>
+    <div class="ask-bottom anim d6">
+      <div class="ask-brand">AulaLayer <span>AI</span></div>
+      <div class="ask-tagline">Siamo all'inizio. Ed è esattamente dove vogliamo essere.</div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SLIDE 6: FINALE — prodotto + team ═══════════ -->
+  <section class="slide slide-final" data-screen-label="06 Finale">
+    <div class="slide-mark" aria-hidden="true">TEAM</div>
+
+    <div class="final-left">
+      
+
+      <div class="final-product-name anim d2">
+        AulaLayer <span>AI</span>
+      </div>
+
+      <div class="final-logo-box anim d3">
+        <img class="final-product-logo"
+             src="AULALAYERAI.png"
+             alt="Logo Aula Layer AI"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="final-logo-fallback">AulaLayer <span>AI</span></div>
+      </div>
+
+      <div class="final-tagline anim d4">
+        Il layer AI on-premise che libera tempo, dati e conoscenza.
+      </div>
+    </div>
+
+    <div class="final-right">
+      <div class="team-panel anim d3">
+        <div class="team-label">Chi siamo</div>
+        <div class="team-members">
+          <div class="team-member">
+            <div class="team-name">Ing. Giona Valentino</div>
+            <div class="team-role">
+              <strong>Ingegnere informatico</strong> — lavora sull'empowerment delle persone e delle organizzazioni attraverso l'AI.
+            </div>
+          </div>
+
+          <div class="team-member">
+            <div class="team-name">Dott. Andrea Gaetani</div>
+            <div class="team-role">
+              <strong>Ingegnere informatico</strong> — porta nel progetto esperienza tecnica nell'implementazione di soluzioni AI.
+            </div>
+          </div>
+        </div>
+
+        <div class="powered-by">
+          <div class="powered-kicker">Powered by</div>
+          <div class="powered-text">
+            Dottorato ICT<br>
+            <span>Università degli Studi dell'Aquila</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="sr-only" id="slideStatus" role="status" aria-live="polite" aria-atomic="true"></div>
+
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  let isTransitioning = false;
+  const storageKey = 'magisterai-pitch-slide';
+
+  const slideBackgrounds = {
+    'slide-hook':     'var(--navy-deep)',
+    'slide-problem':  'var(--white)',
+    'slide-solution': 'var(--navy-deep)',
+    'slide-proof':    'var(--white)',
+    'slide-ask':      'var(--navy-deep)',
+    'slide-final':    'var(--navy-deep)'
+  };
+
+  function saveSlide(index) {
+    try {
+      localStorage.setItem(storageKey, index);
+    } catch (error) {
+      // Private browsing or locked-down embeds can block localStorage.
+    }
+  }
+
+  function getSavedSlide() {
+    try {
+      return localStorage.getItem(storageKey);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function updateBg() {
+    const active = slides[current];
+    if (!active) return;
+    for (const cls in slideBackgrounds) {
+      if (active.classList.contains(cls)) {
+        document.documentElement.style.setProperty('--current-bg', slideBackgrounds[cls]);
+        break;
+      }
+    }
+  }
+
+  function goTo(index) {
+    if (isTransitioning || index === current || index < 0 || index >= total) return;
+    isTransitioning = true;
+
+    const oldSlide = slides[current];
+    const newSlide = slides[index];
+
+    oldSlide.classList.remove('active');
+    newSlide.classList.add('active');
+
+    current = index;
+    saveSlide(current);
+    updateBg();
+
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 500);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+  });
+
+  // Restore position
+  const saved = getSavedSlide();
+  if (saved !== null) {
+    const savedIndex = parseInt(saved, 10);
+    if (savedIndex >= 0 && savedIndex < total) {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[savedIndex].classList.add('active');
+      current = savedIndex;
+      updateBg();
+    }
+  }
+
+  // Scale slides to fit viewport
+  function updateScale() {
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    document.documentElement.style.setProperty('--scale', scale);
+  }
+  window.addEventListener('resize', updateScale);
+  updateScale();
+})();
+</script>
+</body>
+</html>
