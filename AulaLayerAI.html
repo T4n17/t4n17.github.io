@@ -1481,7 +1481,7 @@ body::before {
       Ogni giorno, <em>ore perse</em>.<br>Ogni mese, <em>opportunità bruciate</em>.
     </div>
     <div class="hook-footer anim d5">
-      <div class="hook-date">22/05/2026</div>
+      <div class="hook-date">22/06/2026</div>
     </div>
   </section>
 
@@ -1794,6 +1794,32 @@ body::before {
     if (e.key === 'Home') { e.preventDefault(); goTo(0); }
     if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
   });
+
+  // Touch/swipe support for mobile
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+
+      // Only handle horizontal swipes (horizontal distance > vertical distance)
+      // with a minimum swipe threshold of 50px
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+              goTo(current + 1);  // Swipe left → next slide
+          } else {
+              goTo(current - 1);  // Swipe right → previous slide
+          }
+      }
+  }, { passive: true });
 
   // Restore position
   const saved = getSavedSlide();
