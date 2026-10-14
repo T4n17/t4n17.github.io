@@ -180,31 +180,6 @@ const About: React.FC = () => {
                                 textAlign: 'left',
                                 flex: 1
                               }}>
-                                PhD in Information and Communication Technologies
-                              </Typography>
-                              <Typography className="time-period" sx={{ 
-                                ml: 2,
-                                minWidth: '180px',
-                                textAlign: 'left',
-                                flexShrink: 0
-                              }}>
-                                (November 2025 - Present)
-                              </Typography>
-                            </Box>
-                          </EducationItem>
-                          <EducationItem>
-                            <ArrowRightIcon />
-                            <Box sx={{ 
-                              display: 'flex', 
-                              alignItems: 'center', 
-                              justifyContent: 'space-between',
-                              width: '100%'
-                            }}>
-                              <Typography className="value" sx={{ 
-                                fontSize: '1rem',
-                                textAlign: 'left',
-                                flex: 1
-                              }}>
                                 Master's Degree in Computer Engineering
                               </Typography>
                               <Typography className="time-period" sx={{ 

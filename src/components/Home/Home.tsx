@@ -19,10 +19,10 @@ const Home: React.FC = () => {
       ]
     },
     {
-      title: "AI FOR PUBLIC ADMINISTRATION",
+      title: "AI SOLUTIONS FOR PA",
       items: [
         "Automated Document Processing",
-        "Citizen Interaction Systems",
+        "Users Interaction Systems",
         "Decision-Support Systems"
       ]
     },

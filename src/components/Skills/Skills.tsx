@@ -96,8 +96,8 @@ const skillCategories: SkillCategory[] = [
     url: 'https://ollama.com/',
   },
   {
-    title: 'AI for Public Administration',
-    technologies: ['Automated Document Processing', 'Citizen Interaction Systems', 'Decision-Support Systems', 'Regulatory Compliance (GDPR)'],
+    title: 'AI Solutions for PA',
+    technologies: ['Automated Document Processing', 'Users Interaction Systems', 'Decision-Support Systems', 'Regulatory Compliance (GDPR)'],
     icon: <AccountBalanceIcon />,
     url: 'https://www.agid.gov.it/',
   },
@@ -115,7 +115,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: 'AWS (Hands-on)',
-    technologies: ['Amazon API Gateway', 'AWS Step Functions', 'Amazon ECR', 'Amazon CloudWatch', 'AWS CloudFormation', 'Amazon SageMaker', 'Amazon Bedrock', 'AgentCore'],
+    technologies: ['Amazon API Gateway', 'Amazon CloudWatch', 'AWS CloudFormation', 'Amazon SageMaker', 'Amazon Bedrock', 'AgentCore'],
     icon: <StorageIcon />,
     url: 'https://aws.amazon.com/',
   },
@@ -127,7 +127,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: 'Automation & Delivery',
-    technologies: ['End-to-end Process Automation', 'Workflow Acceleration', 'Operational Efficiency Improvements', 'CI/CD Concepts', 'Release Automation'],
+    technologies: ['End-to-end Process Automation', 'Workflow Acceleration', 'Operational Efficiency Improvements', 'CI/CD Concepts'],
     icon: <AutoModeIcon />,
     url: 'https://aws.amazon.com/devops/',
   },
