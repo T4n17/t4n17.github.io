@@ -180,6 +180,31 @@ const About: React.FC = () => {
                                 textAlign: 'left',
                                 flex: 1
                               }}>
+                                PhD in Information and Communication Technologies
+                              </Typography>
+                              <Typography className="time-period" sx={{ 
+                                ml: 2,
+                                minWidth: '180px',
+                                textAlign: 'left',
+                                flexShrink: 0
+                              }}>
+                                (November 2025 - Present)
+                              </Typography>
+                            </Box>
+                          </EducationItem>
+                          <EducationItem>
+                            <ArrowRightIcon />
+                            <Box sx={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'space-between',
+                              width: '100%'
+                            }}>
+                              <Typography className="value" sx={{ 
+                                fontSize: '1rem',
+                                textAlign: 'left',
+                                flex: 1
+                              }}>
                                 Master's Degree in Computer Engineering
                               </Typography>
                               <Typography className="time-period" sx={{ 
@@ -249,9 +274,10 @@ const About: React.FC = () => {
                       textAlign: 'center',
                       marginBottom: 2
                     }}>
-                      A passionate Computer Engineer with a strong foundation in Software Development
-                      and Machine Learning. Throughout my academic and professional journey, I've gained hands-on experience
-                      with development, security practices, containerization, and cloud based solutions.
+                      ICT PhD Researcher specializing in the architectural design and deployment of secure
+                      Artificial Intelligence solutions for Public Administration. My work focuses on local,
+                      on-premise LLMs that guarantee privacy-by-design, regulatory compliance, and full data
+                      sovereignty, eliminating reliance on third-party cloud APIs.
                     </Typography>
                     <Typography sx={{ 
                       color: '#fff',
@@ -261,8 +287,9 @@ const About: React.FC = () => {
                       textAlign: 'center',
                       marginBottom: 2
                     }}>
-                      My projects reflect my commitment to understanding and improving my knowledge and skills, and they are an expression
-                      of my passion for new challenges and innovations.
+                      With a background as a Computer Engineer in software development, machine learning,
+                      security practices, and cloud-based solutions, I bridge advanced academic research
+                      with practical, compliant software engineering to modernize public services.
                     </Typography>
                   </Stack>
                 </Box>

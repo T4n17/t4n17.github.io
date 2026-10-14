@@ -11,27 +11,27 @@ const Home: React.FC = () => {
 
   const panels = [
     {
-      title: "CLOUD-NATIVE AI",
+      title: "SECURE & SOVEREIGN AI",
       items: [
-        "AWS Solution Architecture",
-        "Serverless & Event-Driven Architectures",
-        "Scalability & Reliability Design"
+        "Local & On-Premise LLM Deployment",
+        "Privacy-by-Design Architectures",
+        "Data Sovereignty & Compliance"
       ]
     },
     {
-      title: "AGENTIC SYSTEMS",
+      title: "AI FOR PUBLIC ADMINISTRATION",
+      items: [
+        "Automated Document Processing",
+        "Citizen Interaction Systems",
+        "Decision-Support Systems"
+      ]
+    },
+    {
+      title: "AGENTIC & CLOUD-NATIVE",
       items: [
         "Multi-Agent Workflows",
-        "Tool & Function Calling",
-        "LLM Application Architecture"
-      ]
-    },
-    {
-      title: "AIOPS & AUTOMATION",
-      items: [
-        "End-to-End Process Automation",
-        "Observability for Distributed Workloads",
-        "Workflow Orchestration"
+        "LLM Application Architecture",
+        "Scalable System Design"
       ]
     }
   ];
@@ -242,7 +242,18 @@ const Home: React.FC = () => {
                       textShadow: '0 0 10px rgba(0, 242, 255, 0.3)',
                     }}
                   >
-                    Computer Engineer
+                    ICT PhD Researcher
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: '"Share Tech Mono", monospace',
+                      color: 'rgba(255, 255, 255, 0.75)',
+                      textAlign: { xs: 'center', md: 'left' },
+                      fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.15rem' },
+                      mt: 1,
+                    }}
+                  >
+                    Secure AI for Public Administration · Computer Engineer
                   </Typography>
                 </motion.div>
               </Box>

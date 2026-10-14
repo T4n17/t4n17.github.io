@@ -12,6 +12,9 @@ import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import AutoModeIcon from '@mui/icons-material/AutoMode';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import ScienceIcon from '@mui/icons-material/Science';
+import LockIcon from '@mui/icons-material/Lock';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import SchoolIcon from '@mui/icons-material/School';
 import { useTerminal } from '../../context/TerminalContext';
 import { styled } from '@mui/material/styles';
 
@@ -87,6 +90,24 @@ const SkillItem = styled(Typography)(({ theme }) => ({
 // Skills categories data array
 const skillCategories: SkillCategory[] = [
   {
+    title: 'Secure & Sovereign AI',
+    technologies: ['Local & On-Premise LLM Deployment', 'Privacy-by-Design Architectures', 'Data Sovereignty', 'Open-Source Foundational Models', 'Edge/Constrained Deployment'],
+    icon: <LockIcon />,
+    url: 'https://ollama.com/',
+  },
+  {
+    title: 'AI for Public Administration',
+    technologies: ['Automated Document Processing', 'Citizen Interaction Systems', 'Decision-Support Systems', 'Regulatory Compliance (GDPR)'],
+    icon: <AccountBalanceIcon />,
+    url: 'https://www.agid.gov.it/',
+  },
+  {
+    title: 'Research & Development',
+    technologies: ['Applied ICT Research', 'LLM Optimization for Local/Edge', 'Data Sovereignty Risk Evaluation', 'Secure AI Benchmarks'],
+    icon: <SchoolIcon />,
+    url: 'https://www.univaq.it/',
+  },
+  {
     title: 'Cloud & Architecture',
     technologies: ['AWS Solution Architecture', 'Serverless Architectures', 'Event-Driven Architectures', 'Workflow Orchestration & Automation', 'Scalability & Reliability Design', 'API-Driven System Design'],
     icon: <CloudIcon />,
@@ -111,7 +132,7 @@ const skillCategories: SkillCategory[] = [
     url: 'https://aws.amazon.com/devops/',
   },
   {
-    title: 'GenAI',
+    title: 'Cloud-based GenAI',
     technologies: ['Amazon Bedrock', 'AgentCore (Agent Workflows, Tool/Function Calling)', 'LLM Application Architecture'],
     icon: <PsychologyIcon />,
     url: 'https://aws.amazon.com/bedrock/',

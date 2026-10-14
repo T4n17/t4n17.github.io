@@ -37,6 +37,7 @@ const Terminal: React.FC = () => {
         term.writeln('\x1b[36mAvailable commands:\x1b[0m');
         term.writeln('  \x1b[36mhelp\x1b[0m     - Show this help message');
         term.writeln('  \x1b[36mclear\x1b[0m    - Clear the terminal');
+        term.writeln('  \x1b[36mabout\x1b[0m    - Who I am');
         term.writeln('  \x1b[36mskills\x1b[0m   - List my skills');
         term.writeln('  \x1b[36mprojects\x1b[0m - View my projects');
         term.writeln('  \x1b[36mcontact\x1b[0m  - Contact information');
@@ -44,13 +45,23 @@ const Terminal: React.FC = () => {
       case 'clear':
         term.clear();
         break;
+      case 'about':
+        term.writeln('\x1b[36m┌─ About ───────────────────────────┐\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m ICT PhD Researcher specializing in AI for');
+        term.writeln('\x1b[36m│\x1b[0m Public Administration. I design and build');
+        term.writeln('\x1b[36m│\x1b[0m secure AI solutions using local LLMs, ensuring');
+        term.writeln('\x1b[36m│\x1b[0m government data remains private and compliant');
+        term.writeln('\x1b[36m│\x1b[0m with strict data sovereignty regulations.');
+        term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
+        break;
       case 'skills':
         term.writeln('\x1b[36m┌─ Skills ──────────────────────────┐\x1b[0m');
+        term.writeln('\x1b[36m│\x1b[0m • Local & On-Premise LLMs');
+        term.writeln('\x1b[36m│\x1b[0m • Privacy-by-Design & Data Sovereignty');
+        term.writeln('\x1b[36m│\x1b[0m • AI for Public Administration');
+        term.writeln('\x1b[36m│\x1b[0m • Machine Learning / AI');
         term.writeln('\x1b[36m│\x1b[0m • Development');
-        term.writeln('\x1b[36m│\x1b[0m • Containerization');
-        term.writeln('\x1b[36m│\x1b[0m • DevOps');
-        term.writeln('\x1b[36m│\x1b[0m • Machine Learning');
-        term.writeln('\x1b[36m│\x1b[0m • AI');
+        term.writeln('\x1b[36m│\x1b[0m • Cloud & DevOps');
         term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
         break;
       case 'projects':
@@ -75,7 +86,7 @@ const Terminal: React.FC = () => {
       case 'contact':
         term.writeln('\x1b[36m┌─ Contact Information ───────────────┐\x1b[0m');
         term.writeln('\x1b[36m│\x1b[0m Email: gaetani.andrea@proton.me');
-        term.writeln('\x1b[36m│\x1b[0m LinkedIn: linkedin.com/in/andrea-gaetani-8a3b9b1b4');
+        term.writeln('\x1b[36m│\x1b[0m LinkedIn: linkedin.com/in/andrea-gaetani-148a832b9');
         term.writeln('\x1b[36m│\x1b[0m GitHub: github.com/t4n17');
         term.writeln('\x1b[36m└────────────────────────────────────┘\x1b[0m');
         break;
