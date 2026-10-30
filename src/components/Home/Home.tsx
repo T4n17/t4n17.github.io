@@ -242,7 +242,7 @@ const Home: React.FC = () => {
                       textShadow: '0 0 10px rgba(0, 242, 255, 0.3)',
                     }}
                   >
-                    ICT PhD Researcher
+                    ICT PhD Student
                   </Typography>
                   <Typography
                     sx={{

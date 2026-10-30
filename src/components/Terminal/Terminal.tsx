@@ -47,7 +47,7 @@ const Terminal: React.FC = () => {
         break;
       case 'about':
         term.writeln('\x1b[36m┌─ About ───────────────────────────┐\x1b[0m');
-        term.writeln('\x1b[36m│\x1b[0m ICT PhD Researcher specializing in AI for');
+        term.writeln('\x1b[36m│\x1b[0m ICT PhD Student specializing in AI for');
         term.writeln('\x1b[36m│\x1b[0m Public Administration. I design and build');
         term.writeln('\x1b[36m│\x1b[0m secure AI solutions using local LLMs, ensuring');
         term.writeln('\x1b[36m│\x1b[0m government data remains private and compliant');

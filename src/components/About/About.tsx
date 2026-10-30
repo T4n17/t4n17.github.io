@@ -249,7 +249,7 @@ const About: React.FC = () => {
                       textAlign: 'center',
                       marginBottom: 2
                     }}>
-                      ICT PhD Researcher specializing in the architectural design and deployment of secure
+                      ICT PhD Student specializing in the architectural design and deployment of secure
                       Artificial Intelligence solutions for Public Administration. My work focuses on local,
                       on-premise LLMs that guarantee privacy-by-design, regulatory compliance, and full data
                       sovereignty, eliminating reliance on third-party cloud APIs.
